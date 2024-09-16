@@ -1,0 +1,53 @@
+dataset_folder: '/media/arvc/DATOS/Juanjo/Datasets/PCD_non_metric_Friburgo/'
+cuda_device: 'cuda:1' # 'cuda:0' or 'cuda:1'
+positive_distance: 0.5 # meters
+negative_distance: 0.7 # meters
+
+use_rgb: False
+use_gray: False
+use_dino_features: False
+use_hue: False
+voxel_size: 0.05 # meters
+max_distance: 6.0 # meters
+height: -0.25 # meters
+save_best: True
+
+quantization_size: 0.01
+num_workers: 8
+batch_size: 2048
+batch_size_limit: 2048
+batch_expansion_rate: Null
+batch_expansion_th: Null
+batch_split_size: 16
+val_batch_size: 16
+
+optimizer: 'AdamW' # Adam or AdamW
+initial_lr: 0.001
+scheduler: 'MultiStepLR' # MultiStepLR or CosineAnnealingLR or Null
+aug_mode: 1 # 1 if yes
+weight_decay: 0.0001
+loss: 'TruncatedSmoothAP'
+margin: Null
+tau1: 0.01
+positives_per_query: 4
+similarity: 'euclidean' # 'cosine' or 'euclidean'
+normalize_embeddings: False
+
+protocol: 'baseline' # baseline or refined
+baseline:
+  epochs: 50
+  scheduler_milestones: [25, 35]
+  train_file: training_queries_baseline.pickle
+  val_file: validation_queries_baseline.pickle
+  train_folder: 'TrainingBaseline/'
+  val_folder: 'Validation/'
+
+
+
+print:
+  model_info: True
+  number_of_parameters: True
+  debug: False
+
+evaluate:
+  weights_path: '/home/arvc/Juanjo/develop/MinkUNeXt/weights/model_MinkUNeXt_refined.pth'
